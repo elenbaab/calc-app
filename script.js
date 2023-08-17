@@ -1,4 +1,4 @@
-let runningTotal = 0;
+let total = 0;
 let buf = "0";
 let prevOperator;
 
@@ -20,7 +20,7 @@ function handleSymbol(symbol){
     switch(symbol){
         case 'C':
             buf = '0';
-            runningTotal = 0;
+            total = 0;
             break;
 
         case '=':
@@ -29,8 +29,8 @@ function handleSymbol(symbol){
             }
             calculate(parseInt(buf));
             prevOperator = null;
-            buf = runningTotal;
-            runningTotal = 0;
+            buf = total;
+            total = 0;
             break;
 
         case '←':
@@ -55,30 +55,30 @@ function handleMath(symbol){
     if(buf === '0'){
         return;
     }
-    const intBuffer = parseInt(buf);
+    const intBuf = parseInt(buf);
 
-    if(runningTotal === 0){
-        runningTotal = intBuffer;
+    if(total === 0){
+        total = intBuf;
     }
     else{
-        calculate(intBuffer);
+        calculate(intBuf);
     }
     prevOperator = symbol;
     buf = '0';
 }
 
-function calculate(intBuffer){
+function calculate(intBuf){
     if(prevOperator === '+'){
-        runningTotal += intBuffer;
+        total += intBuf;
     }
     else if(prevOperator === '−'){
-        runningTotal -= intBuffer;
+        total -= intBuf;
     }
     else if(prevOperator === '×'){
-        runningTotal *= intBuffer;
+        total *= intBuf;
     }
     else if(prevOperator === '÷'){
-        runningTotal /= intBuffer;
+        total /= intBuf;
     }
 }
 
